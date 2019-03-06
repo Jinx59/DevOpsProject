@@ -1,0 +1,24 @@
+---
+
+- name: Provisionning VM
+  hosts: all
+  remote_user: root
+  gather_facts: true
+#  connection: local
+  become: yes
+
+
+  tasks:
+#  - name: Download Scala
+#   get_url: url=http://www.scala-lang.org/files/archive/scala-2.12.8.tgz
+#             dest=/usr/local/src/scala-2.12.8.tgz
+#
+#  - name: Extract and install Scala
+#    unarchive: src=/usr/local/src/scala-2.12.8.tgz
+#               dest=/opt
+#               copy=no
+   - name: install Vim
+     apt:
+      name: vim
+      state: latest
+...
