@@ -1,10 +1,10 @@
 ---
 
 - name: Provisionning VM
-  hosts: all
+  hosts: monitserver
   remote_user: root
   gather_facts: true
-  connection: local
+#  connection: local
   become: yes
 
 

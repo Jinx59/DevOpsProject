@@ -10,32 +10,29 @@ boxes = [
         :eth => "192.168.50.20",
         :mem => "2048",
         :cpu => "1",
-        :box => "centos/7",
-        :user => "vagrant"
+        :box => "centos/7"
     },
     {
         :name => "swarm02",
         :eth => "192.168.50.21",
         :mem => "2048",
         :cpu => "1",
-        :box => "centos/7",
-        :user => "vagrant"
+        :box => "centos/7"
     },
     {
         :name => "swarm03",
         :eth => "192.168.50.22",
         :mem => "2048",
         :cpu => "1",
-        :box => "centos/7",
-        :user => "vagrant"
+        :box => "centos/7"
     },
     {
         :name => "monit",
         :eth => "192.168.50.23",
         :mem => "2048",
         :cpu => "1",
-        :box => "centos/7",
-        :user => "vagrant"
+        :box => "centos/7"
+
     },  
 ]
 
@@ -82,6 +79,7 @@ Vagrant.configure(2) do |config|
         # Ansible provisioner.
         config.vm.provision "ansible" do |ansible|
           ansible.playbook = "playbook.yml"
+          ansible.inventory_path = 'hosts'
           #ansible.ask_become_pass = true
           end 
         end       
