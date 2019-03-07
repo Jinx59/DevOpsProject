@@ -1,0 +1,18 @@
+- name: copying file
+  copy:
+   src: "/tmp/worker.token"
+   dest: "/tmp/worker.token"
+- name: copying ip
+  copy:
+   src: "/tmp/ip"
+   dest: "/tmp/ip"
+- name: "Register worker token"
+  shell: cat /tmp/worker.token
+  register: worker_token
+- name: "Register ip"
+  shell: cat /tmp/ip
+  register: ip
+- name: join as a worker
+  shell: "docker swarm join --token {{worker_token.stdout}} {{ ip.stdout }}:2377"
+  failed_when: false
+  changed_when: false

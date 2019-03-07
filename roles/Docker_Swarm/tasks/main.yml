@@ -1,0 +1,28 @@
+---
+- name: get docker info
+  shell: docker info
+  register: docker_info
+  changed_when: false
+- name: create swarm manager
+  shell: docker swarm init --advertise-addr {{ansible_eth0['ipv4']['address']}}
+  when: "docker_info.stdout.find('Swarm: inactive') != -1"
+- name: get docker swarm worker token
+  shell: docker swarm join-token -q worker
+  register: worker_token
+- name: save worker token
+  delegate_to: localhost
+  become: false
+  lineinfile:
+    state: present
+    create: yes
+    dest: "/tmp/worker.token"
+    line: "{{worker_token.stdout}}"
+  when: "{{worker_token}}"
+- name: save ip
+  delegate_to: localhost
+  become: false
+  lineinfile:
+    state: present
+    create: yes
+    dest: "/tmp/ip"
+    line: "{{ ansible_eth1.ipv4.address }}"

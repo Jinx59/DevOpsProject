@@ -23,6 +23,13 @@ swarm01 ansible_host=192.168.50.20
 swarm02 ansible_host=192.168.50.21
 swarm03 ansible_host=192.168.50.22
 
+[swarmmanager]
+swarm01 ansible_host=192.168.50.20
+
+[swarmworkers]
+swarm02 ansible_host=192.168.50.21
+swarm03 ansible_host=192.168.50.22
+
 [monitserver]
 monit ansible_host=192.168.50.23
 
