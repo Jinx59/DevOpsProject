@@ -1,11 +1,18 @@
+---
+- name: remove worker.token
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/worker.token"
 - name: copying file
   copy:
-   src: "/tmp/worker.token"
-   dest: "/tmp/worker.token"
+    src: "/tmp/worker.token"
+    dest: "/tmp/worker.token"
 - name: copying ip
   copy:
-   src: "/tmp/ip"
-   dest: "/tmp/ip"
+    src: "/tmp/ip"
+    dest: "/tmp/ip"
 - name: "Register worker token"
   shell: cat /tmp/worker.token
   register: worker_token

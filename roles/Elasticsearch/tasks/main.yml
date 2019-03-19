@@ -1,0 +1,13 @@
+---
+- name: CREATE ELASTICSEARCH CONFIGURATION FILES
+  template:
+    src: "{{ item }}"
+    dest: "{{ es_path.conf }}/{{ item }}"
+  with_items:
+    - elasticsearch.yml.j2
+- name: docker compose elasticsearch
+  copy:
+    src: "docker-compose.yml"
+    dest: "/tmp/docker-compose.yml"
+- name: create service with docker-compose
+  shell: "docker stack deploy --compose-file=/tmp/docker-compose.yml elastic"

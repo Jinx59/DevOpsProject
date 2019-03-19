@@ -1,0 +1,43 @@
+---
+
+# Elasticsearch Package
+es_version: 6.6.1
+es_url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ es_version }}.tar.gz
+
+set_proxy: false
+clean_data: false
+create_volume: true
+debug_mode: false
+
+uninstall: false
+install: true
+
+es_cluster_name: "Elasticsearch Cluster"
+es_minimum_master_nodes: 1
+es_http_port: 9200
+es_heap_size: 2g
+es_user: esvagrant
+es_group: esvagrant
+es_path:
+  home:   "/opt/elasticsearch"
+  data:   "/product/elasticsearch"
+  log:    "/opt/elasticsearch/log"
+  conf:   "/opt/elasticsearch/config"
+  plugin: "/opt/elasticsearch/plugins"
+  pid:    "/opt/elasticsearch"
+es_data:
+  pv: /dev/sdb
+  vg: productvg
+  lv: elasticsearch
+  lv_size: 120G
+
+elasticsearch_group: elasticsearch # elasticsearch or elk
+
+# Plugins
+# install_plugins: true
+# transport_couchbase_version: 2.{{es_version}}
+# transport_couchbase_url: https://github.com/couchbaselabs/elasticsearch-transport-couchbase/releases/download/{{transport_couchbase_version}}/elasticsearch-transport-couchbase-{{transport_couchbase_version}}.zip
+
+# Couchbase Credentials
+# couchbase_admin: "Administrator"
+# couchbase_password: "couchbase"

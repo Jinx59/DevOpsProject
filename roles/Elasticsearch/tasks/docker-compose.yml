@@ -1,0 +1,16 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    volumes:
+      - "/opt/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+    # ports:
+    #   - 9200:9200
+    # environment:
+    #   - node.name=elasticsearch01
+    #   - "ES_JAVA_OPTS=-Xmx512m -Xms512m"
+    networks:
+      - esnet
+networks:
+  esnet:
+

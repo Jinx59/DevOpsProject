@@ -3,6 +3,13 @@
   shell: docker info
   register: docker_info
   changed_when: false
+- name: remove worker.token
+  delegate_to: localhost
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/worker.token"
 - name: create swarm manager
   shell: docker swarm init --advertise-addr {{ansible_eth0['ipv4']['address']}}
   when: "docker_info.stdout.find('Swarm: inactive') != -1"
