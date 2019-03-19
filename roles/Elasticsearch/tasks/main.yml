@@ -1,10 +1,16 @@
 ---
+- name: CREATE ELASTICSEARCH DIRECTORIES
+  file:
+    path: "{{ item.value }}"
+    state: directory
+  with_dict: "{{ es_path }}"
 - name: CREATE ELASTICSEARCH CONFIGURATION FILES
   template:
     src: "{{ item }}"
     dest: "{{ es_path.conf }}/{{ item }}"
   with_items:
     - elasticsearch.yml.j2
+    - jvm.options
 - name: docker compose elasticsearch
   copy:
     src: "docker-compose.yml"
